@@ -1,6 +1,6 @@
 package com.celso.taskApp.task.domain;
 
-public enum Priority {
+public enum EPriority {
     LOW,
     MEDIUM,
     HIGH

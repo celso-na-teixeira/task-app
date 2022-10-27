@@ -1,18 +1,21 @@
 package com.celso.taskApp.task.domainForm;
 
-import com.celso.taskApp.task.domain.Priority;
+import com.celso.taskApp.task.domain.EPriority;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class TaskBuilderImpl implements TaskBuilder{
 
     private Long id;
     private String tittle;
     private String description;
-    private Priority priority;
+    private EPriority priority;
     private Boolean completed;
     private Long userId;
     private LocalDateTime changedDt;
+
+    private LocalDateTime createdDt;
 
     @Override
     public TaskBuilder setId(Long id) {
@@ -33,7 +36,7 @@ public class TaskBuilderImpl implements TaskBuilder{
     }
 
     @Override
-    public TaskBuilder setPriority(Priority priority) {
+    public TaskBuilder setPriority(EPriority priority) {
         this.priority=priority;
         return this;
     }
@@ -56,7 +59,31 @@ public class TaskBuilderImpl implements TaskBuilder{
         return this;
     }
 
+    @Override
+    public TaskBuilder setCreatedDt(LocalDateTime createdDt) {
+        this.createdDt = createdDt;
+        return this;
+    }
+
     public TaskForm build(){
-        return new TaskForm(this.tittle, this.description, this.priority, this.completed, this.userId);
+        TaskForm taskForm = new TaskForm();
+        if (!Objects.isNull(this.id))
+            taskForm.setId(this.id);
+        if (!Objects.isNull(this.tittle))
+            taskForm.setTittle(this.tittle);
+        if (!Objects.isNull(this.description))
+            taskForm.setDescription(this.description);
+        if (!Objects.isNull(this.completed))
+            taskForm.setCompleted(this.completed);
+        if (!Objects.isNull(this.priority))
+            taskForm.setPriority(this.priority);
+        if (!Objects.isNull(this.userId))
+            taskForm.setUserId(this.userId);
+        if (!Objects.isNull(this.changedDt))
+            taskForm.setChangedDt(this.changedDt);
+        if (!Objects.isNull(this.createdDt))
+            taskForm.setCreatedDt(this.createdDt);
+
+        return taskForm;
     }
 }

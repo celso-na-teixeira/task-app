@@ -18,7 +18,9 @@ public class ConvertTaskToTaskForm implements Converter<Task, TaskForm> {
         .setDescription(task.getDescription())
         .setPriority(task.getPriority())
         .setCompleted(task.getCompleted())
-        .setUserId(task.getUserId());
+        .setUserId(task.getUserId())
+        .setChangedDt(task.getChangedDt())
+        .setCreatedDt(task.getCreatedDt());
 
     return builder.build();
   }

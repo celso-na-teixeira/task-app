@@ -11,7 +11,7 @@ public class Task {
     private Long id;
     private String tittle;
     private String description;
-    private Priority priority;
+    private EPriority priority;
     private Boolean completed;
     private Long userId;
     private LocalDateTime createdDt;
@@ -20,7 +20,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(String tittle, String description, Priority priority, Boolean completed, Long userId) {
+    public Task(String tittle, String description, EPriority priority, Boolean completed, Long userId) {
         this.tittle = tittle;
         this.description = description;
         this.priority = priority;
@@ -42,7 +42,7 @@ public class Task {
         return description;
     }
 
-    public Priority getPriority() {
+    public EPriority getPriority() {
         return priority;
     }
 
@@ -70,7 +70,7 @@ public class Task {
         this.description = description;
     }
 
-    public void setPriority(Priority priority) {
+    public void setPriority(EPriority priority) {
         this.priority = priority;
     }
 
