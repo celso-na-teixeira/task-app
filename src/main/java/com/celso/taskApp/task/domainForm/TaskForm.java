@@ -1,9 +1,9 @@
 package com.celso.taskApp.task.domainForm;
 
-import com.celso.taskApp.task.domain.EPriority;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import com.celso.taskApp.task.domain.EPriority;
 
 public class TaskForm {
 
@@ -20,12 +20,12 @@ public class TaskForm {
     }
 
     public TaskForm(Long id, String tittle, String description, EPriority priority, Boolean completed, Long userId, LocalDateTime changedDt) {
-        this.id=id;
+        this.id = id;
         this.tittle = tittle;
         this.description = description;
         this.priority = priority;
         this.completed = completed;
-        this.userId=userId;
+        this.userId = userId;
         this.createdDt = changedDt;
     }
 
@@ -41,20 +41,40 @@ public class TaskForm {
         return tittle;
     }
 
+    public void setTittle(String tittle) {
+        this.tittle = tittle;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public EPriority getPriority() {
         return priority;
     }
 
+    public void setPriority(EPriority priority) {
+        this.priority = priority;
+    }
+
     public Boolean getCompleted() {
         return completed;
     }
 
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
+    }
+
     public LocalDateTime getCreatedDt() {
         return createdDt;
+    }
+
+    public void setCreatedDt(LocalDateTime createdDt) {
+        this.createdDt = createdDt;
     }
 
     public LocalDateTime getChangedDt() {
@@ -65,40 +85,47 @@ public class TaskForm {
         this.changedDt = changedDt;
     }
 
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPriority(EPriority priority) {
-        this.priority = priority;
-    }
-
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+    public Long getUserId() {
+        return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setCreatedDt(LocalDateTime createdDt) {
-        this.createdDt = createdDt;
-    }
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
         TaskForm taskForm = (TaskForm) o;
-        return Objects.equals(id, taskForm.id) && Objects.equals(tittle, taskForm.tittle) && Objects.equals(description, taskForm.description) && priority == taskForm.priority && Objects.equals(completed, taskForm.completed) && Objects.equals(createdDt, taskForm.createdDt) && Objects.equals(changedDt, taskForm.changedDt);
+
+        if (!Objects.equals(id, taskForm.id)) {
+            return false;
+        }
+        if (!Objects.equals(tittle, taskForm.tittle)) {
+            return false;
+        }
+        if (!Objects.equals(description, taskForm.description)) {
+            return false;
+        }
+        if (priority != taskForm.priority) {
+            return false;
+        }
+        if (!Objects.equals(completed, taskForm.completed)) {
+            return false;
+        }
+        if (!Objects.equals(userId, taskForm.userId)) {
+            return false;
+        }
+        if (!Objects.equals(createdDt, taskForm.createdDt)) {
+            return false;
+        }
+        return Objects.equals(changedDt, taskForm.changedDt);
     }
 
     @Override
@@ -108,14 +135,7 @@ public class TaskForm {
 
     @Override
     public String toString() {
-        return "TaskForm{" +
-                "id=" + id +
-                ", tittle='" + tittle + '\'' +
-                ", description='" + description + '\'' +
-                ", priority=" + priority +
-                ", completed=" + completed +
-                ", createdDt=" + createdDt +
-                ", changedDt=" + changedDt +
-                '}';
+        return "TaskForm{" + "id=" + id + ", tittle='" + tittle + '\'' + ", description='" + description + '\'' + ", priority=" + priority
+                + ", completed=" + completed + ", createdDt=" + createdDt + ", changedDt=" + changedDt + '}';
     }
 }

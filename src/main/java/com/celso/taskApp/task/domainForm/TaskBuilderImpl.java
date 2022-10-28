@@ -1,11 +1,11 @@
 package com.celso.taskApp.task.domainForm;
 
-import com.celso.taskApp.task.domain.EPriority;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class TaskBuilderImpl implements TaskBuilder{
+import com.celso.taskApp.task.domain.EPriority;
+
+public class TaskBuilderImpl implements TaskBuilder {
 
     private Long id;
     private String tittle;
@@ -19,43 +19,43 @@ public class TaskBuilderImpl implements TaskBuilder{
 
     @Override
     public TaskBuilder setId(Long id) {
-        this.id=id;
+        this.id = id;
         return this;
     }
 
     @Override
     public TaskBuilder setTittle(String tittle) {
-        this.tittle=tittle;
+        this.tittle = tittle;
         return this;
     }
 
     @Override
     public TaskBuilder setDescription(String description) {
-        this.description=description;
+        this.description = description;
         return this;
     }
 
     @Override
     public TaskBuilder setPriority(EPriority priority) {
-        this.priority=priority;
+        this.priority = priority;
         return this;
     }
 
     @Override
     public TaskBuilder setCompleted(Boolean completed) {
-        this.completed=completed;
+        this.completed = completed;
         return this;
     }
 
     @Override
     public TaskBuilder setUserId(long userId) {
-        this.userId=userId;
+        this.userId = userId;
         return this;
     }
 
     @Override
     public TaskBuilder setChangedDt(LocalDateTime changedDt) {
-        this.changedDt=changedDt;
+        this.changedDt = changedDt;
         return this;
     }
 
@@ -65,7 +65,7 @@ public class TaskBuilderImpl implements TaskBuilder{
         return this;
     }
 
-    public TaskForm build(){
+    public TaskForm build() {
         TaskForm taskForm = new TaskForm();
         if (!Objects.isNull(this.id))
             taskForm.setId(this.id);
