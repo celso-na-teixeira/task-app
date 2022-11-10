@@ -2,7 +2,8 @@ package com.celso.taskapp.task.domainform;
 
 import java.time.LocalDateTime;
 
-import com.celso.taskapp.task.domain.EPriority;
+import com.celso.taskapp.login.models.User;
+import com.celso.taskapp.task.domain.Priority;
 
 public interface TaskBuilder {
 
@@ -12,11 +13,11 @@ public interface TaskBuilder {
 
     TaskBuilder setDescription(String description);
 
-    TaskBuilder setPriority(EPriority priority);
+    TaskBuilder setPriority(Priority priority);
 
     TaskBuilder setCompleted(Boolean completed);
 
-    TaskBuilder setUserId(long userId);
+    TaskBuilder setUserId(User user);
 
     TaskBuilder setChangedDt(LocalDateTime changedDt);
 

@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.celso.taskapp.login.models.User;
 import com.celso.taskapp.task.domain.EPriority;
+import com.celso.taskapp.task.domain.Priority;
 import com.celso.taskapp.task.domain.Task;
 import com.celso.taskapp.task.repository.TaskRepository;
 
@@ -28,11 +30,13 @@ public class TaskRepositoryTest {
 
     @BeforeEach
     void setup() {
+        final User john = new User("John", "john@task.com", "123456");
+        final User mary = new User("Mary", "mary@task.com", "123456");
         final List<Task> tasks = Arrays.asList(
-                new Task("Testing repository", "This is a setup for the repository testing", EPriority.MEDIUM, false, 1L),
-                new Task("Testing repo 1", "This is a setup for the repository testing 1", EPriority.LOW, false, 1L),
-                new Task("Testing repo 2", "This is a setup for the repository testing 2", EPriority.MEDIUM, true, 2L),
-                new Task("Testing repo 3", "This is a setup for the repository testing 3", EPriority.HIGH, false, 2L));
+                new Task("Testing repository", "This is a setup for the repository testing", new Priority(EPriority.MEDIUM), false, john),
+                new Task("Testing repo 1", "This is a setup for the repository testing 1", new Priority(EPriority.LOW), false, john),
+                new Task("Testing repo 2", "This is a setup for the repository testing 2", new Priority(EPriority.MEDIUM), true, mary),
+                new Task("Testing repo 3", "This is a setup for the repository testing 3", new Priority(EPriority.HIGH), false, mary));
         taskRepository.saveAll(tasks);
     }
 
@@ -43,9 +47,11 @@ public class TaskRepositoryTest {
 
     @Test
     void saveAll_success() {
-        final List<Task> tasks = Arrays.asList(new Task("Testing repo 4", "This is a setup for the repository testing 4", EPriority.LOW, false, 1L),
-                new Task("Testing repo 5", "This is a setup for the repository testing 5", EPriority.MEDIUM, true, 1L),
-                new Task("Testing repo 6", "This is a setup for the repository testing 6", EPriority.HIGH, false, 1L));
+        final User john = new User("John", "john@task.com", "123456");
+        final List<Task> tasks = Arrays.asList(
+                new Task("Testing repo 4", "This is a setup for the repository testing 4", new Priority(EPriority.LOW), false, john),
+                new Task("Testing repo 5", "This is a setup for the repository testing 5", new Priority(EPriority.MEDIUM), true, john),
+                new Task("Testing repo 6", "This is a setup for the repository testing 6", new Priority(EPriority.HIGH), false, john));
 
         final Iterable<Task> taskIterable = taskRepository.saveAll(tasks);
 
@@ -63,7 +69,7 @@ public class TaskRepositoryTest {
     void findByIdAndUserIdTest_success() {
         final Task taskdb = taskRepository.findAll().stream().findAny().orElse(null);
         assertNotNull(taskdb);
-        final Task task = taskRepository.findByIdAndUserId(taskdb.getId(), taskdb.getUserId()).orElse(null);
+        final Task task = taskRepository.findByIdAndUserId(taskdb.getId(), taskdb.getUser().getId()).orElse(null);
         assertThat(taskdb).isEqualTo(task);
     }
 

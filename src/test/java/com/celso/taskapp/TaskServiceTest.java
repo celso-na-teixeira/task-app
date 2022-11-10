@@ -19,6 +19,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.celso.taskapp.login.models.User;
 import com.celso.taskapp.login.repository.UserRepository;
 import com.celso.taskapp.task.domain.EPriority;
+import com.celso.taskapp.task.domain.Priority;
 import com.celso.taskapp.task.domain.Task;
 import com.celso.taskapp.task.repository.TaskRepository;
 import com.celso.taskapp.task.service.TaskService;
@@ -38,7 +39,8 @@ public class TaskServiceTest {
 
     @Test
     void createTaskTest_success() {
-        final Task task = new Task("Testing createTask", "This is a test to createTask", EPriority.HIGH, false, 1L);
+        final User mary = new User("Mary", "mary@task.com", "123456");
+        final Task task = new Task("Testing createTask", "This is a test to createTask", new Priority(EPriority.HIGH), false, mary);
 
         when(taskRepository.save(any(Task.class))).thenReturn(task);
 
@@ -49,10 +51,11 @@ public class TaskServiceTest {
 
     @Test
     void listTastTest() {
-        final User user = new User("admin", "admin@test.com", "12345");
-        final List<Task> taskList = Arrays.asList(new Task("Testing listTask 1", "This is a test to listTask", EPriority.HIGH, false, 1L),
-                new Task("Testing listTask 2", "This is a test to listTask", EPriority.LOW, false, 1L));
-        when(userRepository.findById(1l)).thenReturn(Optional.of(Optional.of(user).get()));
+        final User admin = new User("admin", "admin@test.com", "12345");
+        final List<Task> taskList = Arrays.asList(
+                new Task("Testing listTask 1", "This is a test to listTask", new Priority(EPriority.HIGH), false, admin),
+                new Task("Testing listTask 2", "This is a test to listTask", new Priority(EPriority.LOW), false, admin));
+        when(userRepository.findById(1l)).thenReturn(Optional.of(Optional.of(admin).get()));
         when(taskRepository.findAllByUserId(1L)).thenReturn(taskList);
 
         final List<Task> tasks = taskRepository.findAllByUserId(1l);
@@ -63,7 +66,8 @@ public class TaskServiceTest {
 
     @Test
     void deleteTaskTest() throws Exception {
-        final Task task = new Task("Testing delete task", "This is a test to delete task", EPriority.LOW, false, 1L);
+        final User mary = new User("Mary", "mary@task.com", "123456");
+        final Task task = new Task("Testing delete task", "This is a test to delete task", new Priority(EPriority.LOW), false, mary);
         when(taskRepository.findById(1L)).thenReturn(Optional.of(Optional.of(task).get()));
 
         taskService.deleteTask(1L);

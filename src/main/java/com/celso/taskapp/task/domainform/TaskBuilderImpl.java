@@ -3,16 +3,17 @@ package com.celso.taskapp.task.domainform;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.celso.taskapp.task.domain.EPriority;
+import com.celso.taskapp.login.models.User;
+import com.celso.taskapp.task.domain.Priority;
 
 public class TaskBuilderImpl implements TaskBuilder {
 
     private Long id;
     private String tittle;
     private String description;
-    private EPriority priority;
+    private Priority priority;
     private Boolean completed;
-    private Long userId;
+    private User user;
     private LocalDateTime changedDt;
 
     private LocalDateTime createdDt;
@@ -36,7 +37,7 @@ public class TaskBuilderImpl implements TaskBuilder {
     }
 
     @Override
-    public TaskBuilder setPriority(final EPriority priority) {
+    public TaskBuilder setPriority(final Priority priority) {
         this.priority = priority;
         return this;
     }
@@ -48,8 +49,8 @@ public class TaskBuilderImpl implements TaskBuilder {
     }
 
     @Override
-    public TaskBuilder setUserId(final long userId) {
-        this.userId = userId;
+    public TaskBuilder setUserId(final User user) {
+        this.user = user;
         return this;
     }
 
@@ -82,8 +83,8 @@ public class TaskBuilderImpl implements TaskBuilder {
         if (!Objects.isNull(this.priority)) {
             taskForm.setPriority(this.priority);
         }
-        if (!Objects.isNull(this.userId)) {
-            taskForm.setUserId(this.userId);
+        if (!Objects.isNull(this.user)) {
+            taskForm.setUserId(this.user);
         }
         if (!Objects.isNull(this.changedDt)) {
             taskForm.setChangedDt(this.changedDt);

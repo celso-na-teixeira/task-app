@@ -17,7 +17,7 @@ public class ConvertTaskFormToTask implements Converter<TaskForm, Task> {
     public Task convert(final TaskForm form) {
         LOGGER.info("Start convert from TaskForm to Task");
         final Task task = new Task();
-        task.setUserId(form.getUserId());
+        task.setUser(form.getUserId());
         task.setTittle(form.getTittle());
         task.setDescription(form.getDescription());
         task.setPriority(form.getPriority());

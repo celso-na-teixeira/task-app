@@ -3,29 +3,31 @@ package com.celso.taskapp.task.domainform;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.celso.taskapp.task.domain.EPriority;
+import com.celso.taskapp.login.models.User;
+import com.celso.taskapp.task.domain.Priority;
 
 public class TaskForm {
 
     private Long id;
     private String tittle;
     private String description;
-    private EPriority priority;
+    private Priority priority;
     private Boolean completed;
-    private Long userId;
+    private User user;
     private LocalDateTime createdDt;
     private LocalDateTime changedDt;
 
     public TaskForm() {
     }
 
-    public TaskForm(final Long id, final String tittle, final String description, final EPriority priority, final Boolean completed, final Long userId, final LocalDateTime changedDt) {
+    public TaskForm(final Long id, final String tittle, final String description, final Priority priority, final Boolean completed, final User user,
+                    final LocalDateTime changedDt) {
         this.id = id;
         this.tittle = tittle;
         this.description = description;
         this.priority = priority;
         this.completed = completed;
-        this.userId = userId;
+        this.user = user;
         this.createdDt = changedDt;
     }
 
@@ -53,11 +55,11 @@ public class TaskForm {
         this.description = description;
     }
 
-    public EPriority getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(final EPriority priority) {
+    public void setPriority(final Priority priority) {
         this.priority = priority;
     }
 
@@ -85,12 +87,12 @@ public class TaskForm {
         this.changedDt = changedDt;
     }
 
-    public Long getUserId() {
-        return userId;
+    public User getUserId() {
+        return user;
     }
 
-    public void setUserId(final Long userId) {
-        this.userId = userId;
+    public void setUserId(final User userId) {
+        this.user = user;
     }
 
     @Override
@@ -119,7 +121,7 @@ public class TaskForm {
         if (!Objects.equals(completed, taskForm.completed)) {
             return false;
         }
-        if (!Objects.equals(userId, taskForm.userId)) {
+        if (!Objects.equals(user, taskForm.user)) {
             return false;
         }
         if (!Objects.equals(createdDt, taskForm.createdDt)) {

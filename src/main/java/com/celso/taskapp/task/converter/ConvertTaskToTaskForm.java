@@ -13,7 +13,7 @@ public class ConvertTaskToTaskForm implements Converter<Task, TaskForm> {
     @Override
     public TaskForm convert(final Task task) {
         final TaskBuilderImpl builder = (TaskBuilderImpl) new TaskBuilderImpl().setId(task.getId()).setTittle(task.getTittle())
-                .setDescription(task.getDescription()).setPriority(task.getPriority()).setCompleted(task.getCompleted()).setUserId(task.getUserId())
+                .setDescription(task.getDescription()).setPriority(task.getPriority()).setCompleted(task.getCompleted()).setUserId(task.getUser())
                 .setChangedDt(task.getChangedDt()).setCreatedDt(task.getCreatedDt());
 
         return builder.build();

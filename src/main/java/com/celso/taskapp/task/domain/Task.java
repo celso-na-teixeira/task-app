@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.celso.taskapp.login.models.User;
 
 @Entity
 public class Task {
@@ -16,21 +20,25 @@ public class Task {
     private Long id;
     private String tittle;
     private String description;
-    private EPriority priority;
+    @ManyToOne
+    @JoinColumn(name = "priority_id")
+    private Priority priority;
     private Boolean completed;
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     private LocalDateTime createdDt;
     private LocalDateTime changedDt;
 
     public Task() {
     }
 
-    public Task(String tittle, String description, EPriority priority, Boolean completed, Long userId) {
+    public Task(final String tittle, final String description, final Priority priority, final Boolean completed, final User user) {
         this.tittle = tittle;
         this.description = description;
         this.priority = priority;
         this.completed = completed;
-        this.userId = userId;
+        this.user = user;
         this.createdDt = LocalDateTime.now();
     }
 
@@ -42,7 +50,7 @@ public class Task {
         return tittle;
     }
 
-    public void setTittle(String tittle) {
+    public void setTittle(final String tittle) {
         this.tittle = tittle;
     }
 
@@ -50,15 +58,15 @@ public class Task {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
-    public EPriority getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(EPriority priority) {
+    public void setPriority(final Priority priority) {
         this.priority = priority;
     }
 
@@ -66,23 +74,23 @@ public class Task {
         return completed;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setCompleted(final Boolean completed) {
         this.completed = completed;
     }
 
-    public long getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(final User user) {
+        this.user = user;
     }
 
     public LocalDateTime getCreatedDt() {
         return createdDt;
     }
 
-    public void setCreatedDt(LocalDateTime createdDt) {
+    public void setCreatedDt(final LocalDateTime createdDt) {
         this.createdDt = createdDt;
     }
 
@@ -90,12 +98,12 @@ public class Task {
         return changedDt;
     }
 
-    public void setChangedDt(LocalDateTime changedDt) {
+    public void setChangedDt(final LocalDateTime changedDt) {
         this.changedDt = changedDt;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -103,7 +111,7 @@ public class Task {
             return false;
         }
 
-        Task task = (Task) o;
+        final Task task = (Task) o;
 
         if (!Objects.equals(id, task.id)) {
             return false;
@@ -120,7 +128,7 @@ public class Task {
         if (!Objects.equals(completed, task.completed)) {
             return false;
         }
-        if (!Objects.equals(userId, task.userId)) {
+        if (!Objects.equals(user, task.user)) {
             return false;
         }
         if (!Objects.equals(createdDt, task.createdDt)) {
@@ -131,12 +139,12 @@ public class Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, tittle, description, priority, completed, userId, createdDt, changedDt);
+        return Objects.hash(id, tittle, description, priority, completed, user, createdDt, changedDt);
     }
 
     @Override
     public String toString() {
         return "Task{" + "id=" + id + ", tittle='" + tittle + '\'' + ", description='" + description + '\'' + ", priority=" + priority
-                + ", completed=" + completed + ", userId=" + userId + ", createdDt=" + createdDt + ", changedDt=" + changedDt + '}';
+                + ", completed=" + completed + ", userId=" + user + ", createdDt=" + createdDt + ", changedDt=" + changedDt + '}';
     }
 }

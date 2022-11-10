@@ -8,8 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.celso.taskapp.login.models.User;
 import com.celso.taskapp.task.converter.ConvertTaskToTaskForm;
 import com.celso.taskapp.task.domain.EPriority;
+import com.celso.taskapp.task.domain.Priority;
 import com.celso.taskapp.task.domain.Task;
 import com.celso.taskapp.task.domainform.TaskForm;
 
@@ -26,8 +28,9 @@ class ConvertTaskToTaskFormTest {
     @Test
     void convertTaskToTaskFormTest() {
         final LocalDateTime date = LocalDateTime.now();
-        final TaskForm taskForm = new TaskForm(null, "Task tittle", "Task description", EPriority.HIGH, false, 1L, date);
-        final Task taskOriginal = new Task("Task tittle", "Task description", EPriority.HIGH, false, 1L);
+        final User john = new User("John", "john@task.com", "123456");
+        final TaskForm taskForm = new TaskForm(null, "Task tittle", "Task description", new Priority(EPriority.HIGH), false, john, date);
+        final Task taskOriginal = new Task("Task tittle", "Task description", new Priority(EPriority.HIGH), false, john);
         taskOriginal.setCreatedDt(date);
         final TaskForm taskFormConverted = convertTaskToTaskForm.convert(taskOriginal);
 
